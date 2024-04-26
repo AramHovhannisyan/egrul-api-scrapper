@@ -3,6 +3,8 @@
 - The API is built on express.js and typescript and is designed to provide information from egrul.nalog.ru.
 - First it searches locally, then requests it from egrul.nalog.ru if it is not found.
 
+- Documentation - /api-docs/#/default/get_api_v1_search
+
 # Instructions
 
 To start the app
