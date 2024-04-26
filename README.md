@@ -1,16 +1,17 @@
-# eslint-ts-dotenv-setup
+# About project
 
-# eslint-ts-setup + dotenv confugured
+- API is build with express.js and typescript, to provide information from egrul.nalog.ru.
+- First it looks for it locally, then scraps from egrul.nalog.ru if was not found.
 
-Application has 1 file src/app.ts.
+# Instructions
 
-Typscript is set up and outdir is the dist folder.
+To start the app
 
-EsLint setup included.
+- Copy data from .env-sample to .env, and update variables if necessary. 
+- Run `docker compose up`
 
-Nodemon setup included.
+# Params
 
-Development Mode Script:
-npm run start
-Production Mode Script:
-npm run build
+SERVER_PORT - is the entry point to app API.
+
+SEARCH_STRICT_MODE - To search by exact match (On by default)
