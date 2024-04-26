@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  mongo:
+    image: mongo
+    restart: unless-stopped
+    ports:
+      - $MONGO_DB_LOCAL_PORT:$MONGO_DB_DOCKER_PORT
+    volumes:
+      - mongodb_data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: $MONGO_USERNAME
+      MONGO_INITDB_ROOT_PASSWORD: $MONGO_PASSWORD
+      MONGO_INITDB_DATABASE: $MONGO_DB_NAME
+
+  app:
+    depends_on:
+      - mongo
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $SERVER_PORT:$NODE_DOCKER_PORT
+    environment:
+      MONGO_ADMIN_USER: $MONGO_USERNAME
+      MONGO_ADMIN_PASS: $MONGO_PASSWORD
+    stdin_open: true
+    tty: true
+
+volumes: 
+  mongodb_data:

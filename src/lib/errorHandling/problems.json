@@ -1,0 +1,19 @@
+[
+  {
+    "code": 1001,
+    "status": 500,
+    "title": "Internal Server Error"
+  },
+  {
+    "code": 1002,
+    "status": 404,
+    "title": "Page not found",
+    "skipLogging": true
+  },
+  {
+    "code": 1003,
+    "status": 429,
+    "title": "Too Many Requests",
+    "skipLogging": true
+  }
+]
