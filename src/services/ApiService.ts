@@ -22,7 +22,7 @@ class ApiService {
     const firstPageData = sliceArrayTo(allDataFIltered, 20);
 
     // save all data
-    // await DataService.saveAll(allDataFIltered);
+    await DataService.saveAll(allDataFIltered);
 
     return firstPageData;
   }

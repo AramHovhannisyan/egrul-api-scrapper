@@ -11,7 +11,7 @@ import validateAndSetSearchString from '../middlewares/validateAndSetSearchStrin
  *     description: Retrieve a list of all items from local DB or from https://egrul.nalog.ru/index.html
  *     parameters:
  *       - in: query
- *         name: string
+ *         name: keyword
  *         required: true
  *         description: The keyword to search - ИНН или ОГРН (ОГРНИП) или наименование ЮЛ, ФИО ИП
  *         schema:

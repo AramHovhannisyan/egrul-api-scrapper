@@ -14,10 +14,10 @@ const validateAndSetSearchString = (req: Request, res: Response, next: NextFunct
       });
   }
 
-  const { string, page, stopped } = req.query;
+  const { keyword, page, stopped } = req.query;
   
 
-  res.locals.string = string;
+  res.locals.keyword = keyword;
   res.locals.filters = [];
   res.locals.page = (page) ? +page : 1;
 

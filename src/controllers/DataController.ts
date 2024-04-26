@@ -10,10 +10,10 @@ class DataController {
    * Move to next middleware if no data
    */
   public static async getAll(req: Request, res: Response, next: NextFunction) {
-    const { string, page, filters } = res.locals; 
+    const { keyword, page, filters } = res.locals; 
 
     try {
-      const data = await DataService.searchByKeyword(string, page, filters);
+      const data = await DataService.searchByKeyword(keyword, page, filters);
 
       if (data.length) {
         console.info('Data found in DB');

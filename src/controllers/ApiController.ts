@@ -4,10 +4,10 @@ import problem from '../lib/errorHandling/problem';
 
 class ApiController {
   public static async searchData(req: Request, res: Response, next: NextFunction) {
-    const { string, filters } = res.locals;
+    const { keyword, filters } = res.locals;
     
     try {
-      const allData = await ApiService.getAllFilteredDataByKeyword(string, filters);
+      const allData = await ApiService.getAllFilteredDataByKeyword(keyword, filters);
       if (!allData) {
         return res.status(404).json({
           status: "Fail",

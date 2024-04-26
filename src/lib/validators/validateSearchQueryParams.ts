@@ -1,7 +1,7 @@
 import Joi from 'joi';
 
 const searchQueryParams = Joi.object().keys({
-  string: Joi.string().required(),
+  keyword: Joi.string().required(),
   stopped: Joi.boolean(),
   page: Joi.number().min(1),
 });
