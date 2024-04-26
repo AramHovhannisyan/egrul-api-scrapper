@@ -1,7 +1,12 @@
 # About project
 
 - The API is built on express.js and typescript and is designed to provide information from egrul.nalog.ru.
+
 - First it searches locally, then requests it from egrul.nalog.ru if it is not found.
+
+- If there are more than 1 result pages, the system makes a request for all pages and saves everything.
+
+- Added a delay of 700 ml seconds between page requests to avoid captcha from egrul.nalog.ru.
 
 - Documentation - /api-docs/#/default/get_api_v1_search
 
