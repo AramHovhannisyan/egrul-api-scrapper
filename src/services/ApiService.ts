@@ -5,7 +5,11 @@ import ApiRepository from "../repositories/ApiRepository";
 import DataService from "./DataService";
 
 class ApiService {
-
+  /**
+   * Request from API
+   * Filter if any filter provided
+   * Save all data
+   */
   public static async getAllFilteredDataByKeyword(searchString: string, filters: filterType[]) {
     const allData = await ApiService.getAllPagesItems(searchString);
     if (!allData) {

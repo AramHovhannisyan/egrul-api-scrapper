@@ -5,7 +5,7 @@ import DataRepository from '../repositories/DataRepository';
 
 class DataService {
   /**
-   * 
+   * Search locally
    */
   public static async searchByKeyword(searchString: string, page: number, filters: filterType[]) {
     const pageSize = +config.options.perPage;
@@ -49,6 +49,7 @@ class DataService {
     return results;
   }
 
+  // Insert / Update data
   public static async saveAll(upsertData: createGetUlIpDTO[]) {
     try {
       const isSaved = await DataRepository.upsertMany(upsertData);

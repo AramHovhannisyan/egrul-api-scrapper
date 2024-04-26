@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { validateSearchQueryParams } from '../lib/validators/validateSearchQueryParams';
 
 const validateAndSetSearchString = (req: Request, res: Response, next: NextFunction) => {
+  // JOI validation
   const { error } = validateSearchQueryParams(req.query);
   if (error) {
     console.info(error.details);
@@ -16,7 +17,7 @@ const validateAndSetSearchString = (req: Request, res: Response, next: NextFunct
 
   const { keyword, page, stopped } = req.query;
   
-
+  // Save param-s for next middlewares
   res.locals.keyword = keyword;
   res.locals.filters = [];
   res.locals.page = (page) ? +page : 1;

@@ -4,7 +4,6 @@ import { createGetUlIpDTOParams, filterType } from "../lib/types/searchTypes";
 import { delay, getValueByKey, isJsonResponse, isStringValidJson } from "../lib/utils/globalUtils";
 
 class ApiRepository {
-  
   /**
    * Build Cookie
    * Build Params
@@ -20,9 +19,9 @@ class ApiRepository {
     const responseBody = await this.searchRequestToAPI(requestUrl, params);
 
     if (!isStringValidJson(responseBody)) {
-      console.log("responseBody:", responseBody);
+      console.info("responseBody:", responseBody);
       
-      throw new Error("Invalid JSON response");
+      throw new Error("Invalid JSON response from API");
     }
     
     const responseObj = JSON.parse(responseBody);    
@@ -49,15 +48,11 @@ class ApiRepository {
     const responseBody: string = await response.text();    
 
     const isResponseCorrectFormatted = await isJsonResponse(response);
-    if (!isResponseCorrectFormatted) {
-      console.log("response:", await response.text());
-      
+    if (!isResponseCorrectFormatted) {      
       throw new Error('The API request is returning an error, please try again.');
     }
 
-    if (!isStringValidJson(responseBody)) {
-      console.log(responseBody, typeof responseBody);
-      
+    if (!isStringValidJson(responseBody)) {      
       throw new Error(responseBody);
     }
 
@@ -135,8 +130,8 @@ class ApiRepository {
   public static async getAllPagesUrls(pagesTotal: number, searchWord: string) {
     const pagesUrls = [];
     for (let index = 2; index <= pagesTotal; index++) {
-      const x = await this.buildRequestCookies();
-      const params: RequestInit = this.buildRequestParams(searchWord, index, x);
+      const cookies = await this.buildRequestCookies();
+      const params: RequestInit = this.buildRequestParams(searchWord, index, cookies);
       const requestUrl = await this.buildRequestUrl(params);
       pagesUrls.push(requestUrl);
 
@@ -150,7 +145,6 @@ class ApiRepository {
    * Request to all pages data except the first page
    */
   public static async requestNextPagesData(pagesUrls: string[]) {
-    const rejectedItems = [];
     const pagedData: createGetUlIpDTOParams[][] = [];
 
     const pageRequests = pagesUrls.map(url => fetch(url));
@@ -158,10 +152,8 @@ class ApiRepository {
     const allPagesData = await Promise.all(pageRequests);    
     
     for (const item of allPagesData) {
+      // Some captcha required request return 500 html content
       if (!isJsonResponse(item)) {
-        // console.log("Problematic item", await item.text());
-        console.log("pageUrl:", item.url);
-        
         continue;
       }
       
@@ -171,6 +163,7 @@ class ApiRepository {
 
     return pagedData;
   }
+
   /**
    * Uses pregenerated page url-s in getAllPagesUrls, getNextPagesData
    */
@@ -191,7 +184,7 @@ class ApiRepository {
     return allItemsTogether;
   }
 
-  
+  /* Simple filtration for stopped: true | false filter */
   public static filterItems(items: createGetUlIpDTO[], filters: filterType[]) {    
     const isStopped = getValueByKey(filters, 'stopped');
     if (isStopped === null) {
